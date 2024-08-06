@@ -13,7 +13,7 @@ export default function PostPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
     http
-      .get<any, AxiosResponse<Post[]>, any>("/posts")
+      .get<any, AxiosResponse<Post[]>, {}>("/posts")
       .then((response) => setPosts(response.data));
   }, []);
   return (
