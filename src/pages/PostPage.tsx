@@ -1,7 +1,6 @@
 import { Card, Table } from "@mui/joy";
-import axios, { Axios, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { http } from "../utils";
+import { getPosts } from "../commands";
 
 interface Post {
   userId: number;
@@ -12,9 +11,9 @@ interface Post {
 export default function PostPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   useEffect(() => {
-    http
-      .get<any, AxiosResponse<Post[]>, {}>("/posts")
-      .then((response) => setPosts(response.data));
+    getPosts()
+      .then((posts) => setPosts(posts ?? []))
+      .catch(console.error);
   }, []);
   return (
     <>
